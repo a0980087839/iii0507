@@ -84,7 +84,6 @@
   			"altText": "this is a carousel template",
   			"template": {
 				"type": "carousel",
-				"actions": [],
 				"columns": []
   			}
 		}';
