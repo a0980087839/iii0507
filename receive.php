@@ -21,6 +21,8 @@
 		"messages" => welcome()
 	);
 	
+	
+	
 	fwrite($myfile, "\xEF\xBB\xBF".json_encode($response)); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
 	$header[] = "Content-Type: application/json";
 	$header[] = "Authorization: Bearer ch4DaSxjxOTPaO7PR8pKHu67uotfCaPYuLK5zSw70ACvqemT77GTnzqr2b/7+jMIshCmLWf0U7bPLXsqreKz7tGzKkS6e51W8aM18nt+Jshj7DXtIUjvfUV2BZpQxM+NAXrBizCWLCDHc2/XCgrCGwdB04t89/1O/w1cDnyilFU=";
@@ -56,7 +58,7 @@
 			"text": "您可以報名新課程或查看已報名的課程"
 		  }
 		}';
-		return json_decode($json_str);
+		return json_decode($json);
 	}
 	
 	function sql_select_fetchALL($sql)
