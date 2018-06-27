@@ -42,7 +42,7 @@
 	);*/
 	
 
-	fwrite($myfile, "\xEF\xBB\xBF".json_encode($response)); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
+	//fwrite($myfile, "\xEF\xBB\xBF".json_encode($response)); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
 	$header[] = "Content-Type: application/json";
 	$header[] = "Authorization: Bearer ch4DaSxjxOTPaO7PR8pKHu67uotfCaPYuLK5zSw70ACvqemT77GTnzqr2b/7+jMIshCmLWf0U7bPLXsqreKz7tGzKkS6e51W8aM18nt+Jshj7DXtIUjvfUV2BZpQxM+NAXrBizCWLCDHc2/XCgrCGwdB04t89/1O/w1cDnyilFU=";
 	$ch = curl_init("https://api.line.me/v2/bot/message/reply");
@@ -63,13 +63,11 @@
 			  {
 				"type": "postback",
 				"label": "報名課程",
-				"text": "applyCourse",
 				"data": "applyCourse"
 			  },
 			  {
 				"type": "postback",
 				"label": "我的課程",
-				"text": "myCourse",
 				"data": "myCourse"
 			  }
 			],
@@ -103,13 +101,11 @@
 					array (
 						"type" => "postback",
 						"label" => "課程報名",
-						"text" => "報名",
 						"data" => "apply".$a['course_id']
 					),
 					array (
 						"type" => "postback",
 						"label" => "課程介紹",
-						"text" => "介紹",
 						"data" => "intro".$a['course_id']
 					)
 				)
