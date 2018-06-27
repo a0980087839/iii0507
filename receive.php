@@ -10,7 +10,7 @@
 	$sender_replyToken = $json_obj->events[0]->replyToken; //取得訊息的replyToken
 	$sender_type = $json_obj->events[0]->type; //取得訊息的type
 	
-	if($sender_type == "postback"){
+	/*if($sender_type == "postback"){
 		$postback_data = $json_obj->events[0]->postback->data;
 		if($postback_data == "applyCourse"){
 			$response = array (
@@ -20,14 +20,14 @@
 			    	)
 			);
 		}
-	} else {
+	} else {*/
 		$response = array (
 			"replyToken" => $sender_replyToken,
 			"messages" => array (
 			      welcome()
 			    )
 		);
-	}
+	//}
 	
 	//fwrite($myfile, "\xEF\xBB\xBF".welcome());
 
