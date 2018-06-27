@@ -16,7 +16,7 @@
 			$response = array (
 				"replyToken" => $sender_replyToken,
 				"messages" => array (
-			      		apply()
+			      		welcome()
 			    	)
 			);
 		}
