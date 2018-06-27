@@ -18,7 +18,7 @@
 	
 	//fwrite($myfile, "\xEF\xBB\xBF".welcome());
 
-	$response = array (
+	/*$response = array (
 		"replyToken" => $sender_replyToken,
 		"messages" => array (
 		      array (
@@ -26,8 +26,14 @@
 			"text" => "Hello. You say". $course_name
 		      )
 		    )
+	);*/
+	$response = array (
+		"replyToken" => $sender_replyToken,
+		"messages" => array (
+		      welcome()
+		    )
 	);
-	
+
 	fwrite($myfile, "\xEF\xBB\xBF".json_encode($response)); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
 	$header[] = "Content-Type: application/json";
 	$header[] = "Authorization: Bearer ch4DaSxjxOTPaO7PR8pKHu67uotfCaPYuLK5zSw70ACvqemT77GTnzqr2b/7+jMIshCmLWf0U7bPLXsqreKz7tGzKkS6e51W8aM18nt+Jshj7DXtIUjvfUV2BZpQxM+NAXrBizCWLCDHc2/XCgrCGwdB04t89/1O/w1cDnyilFU=";
