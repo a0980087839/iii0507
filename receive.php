@@ -8,9 +8,9 @@
 	$sender_userid = $json_obj->events[0]->source->userId; //取得訊息發送者的id
 	$sender_txt = $json_obj->events[0]->message->text; //取得訊息內容
 	$sender_replyToken = $json_obj->events[0]->replyToken; //取得訊息的replyToken
-	//$sender_type = $json_obj->events[0]->type; //取得訊息的type
+	$sender_type = $json_obj->events[0]->type; //取得訊息的type
 	
-	/*if($sender_type == "postback"){
+	if($sender_type == "postback"){
 		$postback_data = $json_obj->events[0]->postback->data;
 		if($postback_data == "applyCourse"){
 			$response = array (
@@ -20,14 +20,14 @@
 			    	)
 			);
 		}
-	} else {*/
+	} else {
 		$response = array (
 			"replyToken" => $sender_replyToken,
 			"messages" => array (
 			      welcome()
 			    )
 		);
-	//}
+	}
 	
 	//fwrite($myfile, "\xEF\xBB\xBF".welcome());
 
