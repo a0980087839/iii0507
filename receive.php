@@ -90,7 +90,7 @@
 		}';
 		$json = json_decode($json_str);
 		fwrite($myfile, "\xEF\xBB\xBF".json_encode($json)); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
-		/*$sql = "SELECT * FROM course";
+		$sql = "SELECT * FROM course";
 		$result = sql_select_fetchALL($sql);
 		$course_name = "";
 		foreach($result as $a){
@@ -113,7 +113,7 @@
 			$json -> template -> columns[] = $course_obj;
 		}
 		fwrite($myfile, "\xEF\xBB\xBF".json_encode($json)); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
-		*/
+		
 		return $json;
 	}
 
