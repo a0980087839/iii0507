@@ -3,7 +3,7 @@
 	$json_obj = json_decode($json_str); //轉成json格式
 	
 	$myfile = fopen("log.txt", "w+") or die("Unable to open file!"); //設定一個log.txt來印訊息
-	//fwrite($myfile, "\xEF\xBB\xBF".$json_str); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
+	fwrite($myfile, "\xEF\xBB\xBF".$json_str); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
 	
 	$sender_userid = $json_obj->events[0]->source->userId; //取得訊息發送者的id
 	$sender_txt = $json_obj->events[0]->message->text; //取得訊息內容
@@ -16,7 +16,7 @@
 		$course_name = $a['course_name'];
 	}
 	
-	fwrite($myfile, "\xEF\xBB\xBF".welcome());
+	//fwrite($myfile, "\xEF\xBB\xBF".welcome());
 
 	$response = array (
 		"replyToken" => $sender_replyToken,
@@ -28,14 +28,14 @@
 		    )
 	);
 	
-	fwrite($myfile, "\xEF\xBB\xBF".$response); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
+	//fwrite($myfile, "\xEF\xBB\xBF".$response); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
 	
 	//fwrite($myfile, "\xEF\xBB\xBF".json_encode($response)); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
 	$header[] = "Content-Type: application/json";
 	$header[] = "Authorization: Bearer ch4DaSxjxOTPaO7PR8pKHu67uotfCaPYuLK5zSw70ACvqemT77GTnzqr2b/7+jMIshCmLWf0U7bPLXsqreKz7tGzKkS6e51W8aM18nt+Jshj7DXtIUjvfUV2BZpQxM+NAXrBizCWLCDHc2/XCgrCGwdB04t89/1O/w1cDnyilFU=";
 	$ch = curl_init("https://api.line.me/v2/bot/message/reply");
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-	curl_setopt($ch, CURLOPT_POSTFIELDS, ($response));                                                                  
+	curl_setopt($ch, CURLOPT_POSTFIELDS, json_decode($response));                                                                  
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
 	curl_setopt($ch, CURLOPT_HTTPHEADER, $header);                                                                                                   
 	$result = curl_exec($ch);
