@@ -66,9 +66,9 @@
 	function sql_select_fetchALL($sql)
 	{   
 		$db_server = "localhost";
-		$db_name = "dpcleader_course";
-		$db_user = "dpcleader_sup";
-		$db_passwd = "Ab09800878390";
+		$db_name = "course_management_t";
+		$db_user = "root";
+		$db_passwd = "fdd396906f5054060122311cf8b0eb2da0cfe7a437501152";
 		
 		$con=mysqli_connect($db_server, $db_user, $db_passwd) or die("資料庫登入錯誤");
 		if(mysqli_connect_errno($con)){
