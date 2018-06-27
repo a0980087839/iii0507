@@ -20,7 +20,12 @@
 
 	$response = array (
 		"replyToken" => $sender_replyToken,
-		"messages" => welcome()
+		"messages" => array (
+		      array (
+			"type" => "text",
+			"text" => "Hello. You say". $course_name
+		      )
+		    )
 	);
 	
 	fwrite($myfile, "\xEF\xBB\xBF".$response); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
