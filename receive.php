@@ -8,12 +8,25 @@
 	$sender_userid = $json_obj->events[0]->source->userId; //取得訊息發送者的id
 	$sender_txt = $json_obj->events[0]->message->text; //取得訊息內容
 	$sender_replyToken = $json_obj->events[0]->replyToken; //取得訊息的replyToken
-
-	$sql = "SELECT * FROM course";
-	$result = sql_select_fetchALL($sql);
-	$course_name = "";
-	foreach($result as $a){
-		$course_name = $a['course_name'];
+	$sender_type = $json_obj->events[0]->type; //取得訊息的type
+	
+	if($sender_type == "postback"){
+		$postback_data = $json_obj->events[0]->postback->data;
+		if($postback_data == "applyCourse"){
+			$response = array (
+				"replyToken" => $sender_replyToken,
+				"messages" => array (
+			      		apply()
+			    	)
+			);
+		}
+	} else {
+		$response = array (
+			"replyToken" => $sender_replyToken,
+			"messages" => array (
+			      welcome()
+			    )
+		);
 	}
 	
 	//fwrite($myfile, "\xEF\xBB\xBF".welcome());
@@ -27,12 +40,7 @@
 		      )
 		    )
 	);*/
-	$response = array (
-		"replyToken" => $sender_replyToken,
-		"messages" => array (
-		      welcome()
-		    )
-	);
+	
 
 	//fwrite($myfile, "\xEF\xBB\xBF".json_encode($response)); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
 	$header[] = "Content-Type: application/json";
@@ -55,14 +63,14 @@
 			  {
 				"type": "postback",
 				"label": "報名課程",
-				"text": "apply",
-				"data": "aaa"
+				"text": "applyCourse",
+				"data": "applyCourse"
 			  },
 			  {
 				"type": "postback",
 				"label": "我的課程",
-				"text": "my",
-				"data": "ccc"
+				"text": "myCourse",
+				"data": "myCourse"
 			  }
 			],
 			"title": "歡迎來到龍鳳行銷",
@@ -72,6 +80,45 @@
 		return json_decode($json);
 	}
 	
+	function apply(){
+		$json_str = '{
+  			"type": "template",
+  			"altText": "this is a carousel template",
+  			"template": {
+				"type": "carousel",
+				"actions": [],
+				"columns": []
+  			}
+		}';
+		$json = json_decode($json_str);
+			
+		$sql = "SELECT * FROM course";
+		$result = sql_select_fetchALL($sql);
+		$course_name = "";
+		foreach($result as $a){
+			$course_obj = array (
+				"title" => $a['course_name'],
+				"text" => $a['course_name'],
+				"action" => array (
+					array (
+						"type" => "postback",
+						"label" => "課程報名",
+						"text" => "報名",
+						"data" => "apply".$a['course_id']
+					),
+					array (
+						"type" => "postback",
+						"label" => "課程介紹",
+						"text" => "介紹",
+						"data" => "intro".$a['course_id']
+					)
+				)
+		      	)
+			$json -> template -> columns[] = $course_obj;
+		}
+		return json_decode($json);
+	}
+
 	function sql_select_fetchALL($sql)
 	{   
 		$db_server = "localhost";
