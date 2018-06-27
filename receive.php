@@ -21,7 +21,7 @@
 		"messages" => welcome()
 	);
 	
-	
+	fwrite($myfile, "\xEF\xBB\xBF".$response); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
 	
 	fwrite($myfile, "\xEF\xBB\xBF".json_encode($response)); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
 	$header[] = "Content-Type: application/json";
