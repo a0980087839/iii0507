@@ -95,7 +95,7 @@
 			$course_obj = array (
 				"title" => $a['course_name'],
 				"text" => $a['course_name'],
-				"action" => array (
+				"actions" => array (
 					array (
 						"type" => "postback",
 						"label" => "課程報名",
