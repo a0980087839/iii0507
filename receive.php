@@ -16,6 +16,8 @@
 		$course_name = $a['course_name'];
 	}
 	
+	fwrite($myfile, "\xEF\xBB\xBF".welcome());
+
 	$response = array (
 		"replyToken" => $sender_replyToken,
 		"messages" => welcome()
